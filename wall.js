@@ -2,7 +2,7 @@ export default class Wall{
     constructor(x, y){
         this.x = 800;
         this.y = 600;
-        this.size = Math.floor(Math.random() * 4);
+        this.size = 1 + Math.floor(Math.random() * 3);
         this.imgSrc = null;
     }
 
