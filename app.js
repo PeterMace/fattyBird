@@ -14,12 +14,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const images = {};
   let bird = new Bird();
   let wallSet = [ new Wall() ];
+  let game = new Game();
 
   //Load Game Images
   load_images("bird", 8);
 
   //Start gameloop
-  let animation = window.setInterval(animate, 75);
+  let gameLoop = window.setInterval(iterateGameLoop, 25);
   
   function load_images(nameSet, maxImgNum){
     for(let i = 1; i <= maxImgNum; i++){
@@ -40,17 +41,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function clearAnimation(){
-    clearInterval(animation);
+    clearInterval(gameLoop);
     clearScreen();
   }
 
-  function animate(){
+  function iterateGameLoop(){
     clearScreen()
     //position_bird()
     animateFatBird()
     animateWalls()
-    spawnWalls()
+    spawnWall()
     destoryWalls()
+
+    //Main game loop
+    game.processFrame()
     //collisionDetect
     //checkWin
   }
@@ -77,6 +81,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let firstWall = wallSet[0];
     if(firstWall.checkDestory()){
       wallSet.shift()
+    }
+  }
+
+  function spawnWall(){
+    if (game.checkWallSpawn()){
+      wallSet.push(new Wall());
     }
   }
 })

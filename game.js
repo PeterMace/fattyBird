@@ -10,6 +10,15 @@ export default class Game{
     processFrame(){
         this.score += this.scoreMultiplier * 1;
         this.frameTicker += 1;
-        this.spawnWall = (this.frameTicker == this.wallSpawnRate) ? true : false
     }
+
+    checkWallSpawn(){
+        if (this.frameTicker == this.wallSpawnRate){
+            this.frameTicker = 0
+            return true
+        } 
+        return false
+    }
+
+    
 }
