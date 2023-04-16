@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("bird", 8);
 
   //Start gameloop
-  let gameLoop = window.setInterval(iterateGameLoop, 25);
+  let gameLoop = window.setInterval(iterateGameLoop, 20);
   
   function load_images(nameSet, maxImgNum){
     for(let i = 1; i <= maxImgNum; i++){
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   function animateFatBird(){
     bird.nextFrame();
     const img_name = `bird-${bird.getFrame()}`;
-    draw(images[img_name], 250 , 250)
+    draw(images[img_name], 250, bird.getY())
   }
 
   function animateWalls(){
@@ -89,4 +89,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       wallSet.push(new Wall());
     }
   }
+
+  canvas.addEventListener('mousedown', function (event) {
+    console.log('mouseup');
+    bird.flyAction();
+ });
 })
