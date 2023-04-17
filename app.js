@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   load_images("bird", 8);
 
   //Start gameloop
-  let gameLoop = window.setInterval(iterateGameLoop, 25);
+  let gameLoop = window.setInterval(iterateGameLoop, 20);
   
   function load_images(nameSet, maxImgNum){
     for(let i = 1; i <= maxImgNum; i++){
@@ -40,14 +40,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function clearAnimation(){
+  function endGame(){
     clearInterval(gameLoop);
-    clearScreen();
   }
 
   function iterateGameLoop(){
     clearScreen()
-    //position_bird()
     animateFatBird()
     animateWalls()
     spawnWall()
@@ -55,14 +53,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     //Main game loop
     game.processFrame()
-    //collisionDetect
+    checkOutOfBounds()
+    collisionDetect
     //checkWin
   }
 
   function animateFatBird(){
     bird.nextFrame();
+    bird.move()
     const img_name = `bird-${bird.getFrame()}`;
-    draw(images[img_name], 250 , 250)
+    draw(images[img_name], 250, bird.getY())
   }
 
   function animateWalls(){
@@ -89,4 +89,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
       wallSet.push(new Wall());
     }
   }
+
+  function checkOutOfBounds(){
+    if(bird.detectOutOfBounds()){endGame()}
+  }
+
+  canvas.addEventListener('mousedown', function (event) {
+    console.log('mouseup');
+    bird.flyAction();
+  });
+
 })
