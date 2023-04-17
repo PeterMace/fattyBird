@@ -12,11 +12,13 @@ export default class Bird{
         if(this.frame > 7){
             this.frame = 1
         }
-        //Movement and Gravity every other frame
+    }
+
+    move(){
+        //Movement and Gravity every other 7th frame
         if (this.frame % 7 == 0){
             this.deltaY += (this.deltaY < -20) ? 1 : 2
             this.y += this.deltaY
-            console.log(this.y, this.deltaY)
         }
     }
 
@@ -31,5 +33,13 @@ export default class Bird{
     getY(){
         return this.y;
     }
+
+    detectOutOfBounds(){
+        if (this.y > 495) {return true}
+        if (this.y < -5) {return true}
+        return false;
+    }
+
+    
 
 }

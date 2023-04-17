@@ -40,14 +40,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  function clearAnimation(){
+  function endGame(){
     clearInterval(gameLoop);
-    clearScreen();
   }
 
   function iterateGameLoop(){
     clearScreen()
-    //position_bird()
     animateFatBird()
     animateWalls()
     spawnWall()
@@ -55,12 +53,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     //Main game loop
     game.processFrame()
-    //collisionDetect
+    checkOutOfBounds()
+    collisionDetect
     //checkWin
   }
 
   function animateFatBird(){
     bird.nextFrame();
+    bird.move()
     const img_name = `bird-${bird.getFrame()}`;
     draw(images[img_name], 250, bird.getY())
   }
@@ -90,8 +90,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
+  function checkOutOfBounds(){
+    if(bird.detectOutOfBounds()){endGame()}
+  }
+
   canvas.addEventListener('mousedown', function (event) {
     console.log('mouseup');
     bird.flyAction();
- });
+  });
+
 })
