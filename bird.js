@@ -18,7 +18,7 @@ export default class Bird{
         //Movement and Gravity every other 7th frame
         if (this.frame % 7 == 0){
             this.deltaY += (this.deltaY < -20) ? 1 : 2
-            this.y += this.deltaY
+            this.y += this.deltaY;
         }
     }
 

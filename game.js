@@ -14,9 +14,18 @@ export default class Game{
 
     checkWallSpawn(){
         if (this.frameTicker == this.wallSpawnRate){
-            this.frameTicker = 0
-            return true
+            this.frameTicker = 0;
+            return true;
         } 
-        return false
+        return false;
     }
+
+    checkWin(){
+        return this.score > 10000;
+    }
+
+    getScore(){
+        return this.score;
+    }
+
 }

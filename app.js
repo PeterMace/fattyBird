@@ -6,8 +6,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   //Game Display Intialization
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
-  //Set low Z index so stores displays in front
-  canvas.style.zIndex = "1";
   ctx.imageSmoothingEnabled = false;
 
   //Game Objects
@@ -54,8 +52,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //Main game loop
     game.processFrame()
     checkOutOfBounds()
-    collisionDetect
-    //checkWin
+    // collisionDetect()
+    checkForWin()
   }
 
   function animateFatBird(){
@@ -91,12 +89,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
 
   function checkOutOfBounds(){
-    if(bird.detectOutOfBounds()){endGame()}
+    if(bird.detectOutOfBounds()){endGame();}
   }
 
   canvas.addEventListener('mousedown', function (event) {
     console.log('mouseup');
     bird.flyAction();
   });
+
+  function checkForWin(){
+    if (game.checkWin()){
+      alert( ` Congratulations, you have beat fattyBird!! `);
+    }
+    endGame()
+  }
 
 })
